@@ -1,0 +1,61 @@
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="bundle.js"></script>
+</head>
+
+<body>
+  <a-scene stats background="color: lightyellow" fog="type: linear; color: lightgoldenrodyellow; near: 2; far: 25">
+    <a-assets>
+      <!-- <a-asset-item id="puits" src="assets/puits.glb"></a-asset-item> 
+      <a-asset-item id="hands" src="assets/hands/scene.gltf"></a-asset-item> -->
+      <a-asset-item id="boat" src="assets/boat/scene.gltf"></a-asset-item>
+      <a-asset-item id="palm" src="assets/palm/scene.gltf"></a-asset-item>
+      <a-asset-item id="bridge" src="assets/bridge/scene.gltf"></a-asset-item>
+      <a-asset-item id="tiger" src="assets/tiger/scene.gltf"></a-asset-item>
+      <a-asset-item id="treasure" src="assets/treasure/scene.gltf"></a-asset-item>
+      <audio id="bravo" src="assets/sounds/bravo.mp3" preload="auto"></audio>
+    </a-assets>
+    <a-entity id="cameraRig" movement-controls="constrainToNavMesh: true; speed: 0.4" movement-extras="run: true"
+      position="0 0 0">
+      <a-entity id="head" camera look-controls="pointerLockEnabled: true" position="0 1.6 0"
+        look-controls="pointerLockEnabled: true">
+        <a-entity geometry="primitive: circle; radius: 0.0005; color: black" material="color:black; shader:flat;" position="0 0 -0.1" cursor
+          raycaster="far: 2; objects: [clickable]"
+          disable-in-vr="component: cursor"
+          cursor-feedback>
+        </a-entity>
+      </a-entity>
+    </a-entity>
+    <a-entity light="type: directional; color: #ffffff; intensity: 0.5;" position="31 80 -50"></a-entity>
+    <a-entity light="type: directional; color: orange; intensity: 2.5;" penumbra="10" position="31 10 -50"></a-entity>
+    <a-entity light="type: directional; color: marine; intensity: 0.4;" position="-31 10 50"></a-entity>
+
+    <a-entity scale="0.0085 0.0085 0.0085" position="0 -3 -13" rotation="0 90 0" gltf-model="#bridge" 
+    animation="property: position; to: 0 0.7 -13; dur: 2000; easing:linear; startEvents: emerge"
+    listen-to="target: #baby_palm; event: click; emit: emerge"
+    ></a-entity>
+    <a-entity scale="0.0065 0.0065 0.0065" position="4.5 0 -3.5" rotation="0 0 0" gltf-model="#palm"></a-entity>
+    <a-entity scale="0.0085 0.0085 0.0085" position="-0.5 0.5 -21" rotation="0 0 0" gltf-model="#treasure"></a-entity>
+    <a-entity id="baby_palm" scale="0.0045 0.0045 0.0045" position="5 0 -2.9" rotation="0 90 0" gltf-model="#palm" clickable
+    sound="src: #bravo; on: click"
+    animation="property: rotation; to: 0 1024 0; dur: 2000; easing:linear; startEvents:click;"></a-entity>
+    <a-entity scale="0.2 0.2 0.2" position="0 -0.5 -21" rotation="0 0 0"  gltf-model="#tiger" animation-mixer="clip: run_*; repetitions:1"></a-entity>
+    <a-entity scale="0.0015 0.0015 0.0015" position="0 -0.5 -21" rotation="0 90 0"  gltf-model="#boat"
+      animation="property: rotation; to: 0 720 0; dur: 1500; easing: linear; startEvents:click"></a-entity>
+    <a-hex size="8" cellsize="0.5" height="0.5" rotation="0 0 0" position="0 -0.4 -1"></a-hex>
+    <a-hex size="9" cellsize="0.5" height="0.5" rotation="0 0 0" position="0 -0.8 -1"></a-hex>
+    <a-sphere scale="15 15 15" material="emissive:gold; emissiveIntensity:1" position="31 5 -100"
+      mytest="speed: 0 -0.01 0;"></a-sphere>
+    <a-ocean position="0 -0.3 0" width="100" depth="100" density="40" amplitude="0.1" speedVariance="0.1" opacity="0.5"></a-ocean>
+    <a-ocean position="0 -0.4 0" width="100" depth="100" density="40" amplitude="0.1" speedVariance="0.2" opacity="1"></a-ocean>
+
+  </a-scene>
+
+</body>
+
+</html>
